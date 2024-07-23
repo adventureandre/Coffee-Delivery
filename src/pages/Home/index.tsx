@@ -1,4 +1,5 @@
-import { ShoppingCart, Timer } from 'phosphor-react'
+import { Coffee, Package } from 'phosphor-react'
+import { useTheme } from 'styled-components'
 
 import {
   Conteiner,
@@ -10,6 +11,8 @@ import {
 } from './styles.ts'
 
 export function Home() {
+  const theme = useTheme()
+
   return (
     <Conteiner>
       <IntoTitle>
@@ -23,22 +26,33 @@ export function Home() {
         <IntoItens>
           <div>
             <span>
-              <IntoIconShop weight="fill" size={16} />
+              <div style={{ backgroundColor: theme.colors['yellow-dark'] }}>
+                <IntoIconShop weight="fill" size={16} />
+              </div>
               Compra simples e segura
             </span>
+
             <span>
-              <IntoIconTimer weight="fill" size={16} />
-              Compra simples e segura
+              <div style={{ backgroundColor: theme.colors.yellow }}>
+                <IntoIconTimer weight="fill" size={16} />
+              </div>
+              Entrega rápida e rastreada
             </span>
           </div>
+
           <div>
             <span>
-              <ShoppingCart weight="fill" size={16} />
-              Compra simples e segura
+              <div style={{ backgroundColor: theme.colors['base-text'] }}>
+                <Package weight="fill" size={16} />
+              </div>
+              Embalagem mantém o café intacto
             </span>
+
             <span>
-              <Timer weight="fill" size={16} />
-              Compra simples e segura
+              <div style={{ backgroundColor: theme.colors.purple }}>
+                <Coffee weight="fill" size={16} />
+              </div>
+              O café chega fresquinho até você
             </span>
           </div>
         </IntoItens>

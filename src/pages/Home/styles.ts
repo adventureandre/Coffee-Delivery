@@ -16,8 +16,7 @@ export const Conteiner = styled.main`
   background-size: cover;
 `
 export const IntoTitle = styled.div`
-  display: flex;
-  justify-content: center;
+padding-top: 30px;
 
   ${mixins.fonts.titleM}
 
@@ -42,9 +41,32 @@ export const IntoItens = styled.div`
 
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+
+  div{
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+    padding: 5px;
+  }
 
   span {
     ${mixins.fonts.textM}
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    div{
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 `
 
