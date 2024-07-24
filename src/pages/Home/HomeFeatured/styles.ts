@@ -1,12 +1,12 @@
 import { IconProps, ShoppingCart, Timer } from 'phosphor-react'
 import styled from 'styled-components'
 
-import { mixins } from '../../styles/mixins'
+import { mixins } from '../../../styles/mixins'
 
 export const Conteiner = styled.main`
   max-width: 1440px;
   width: 100%;
-  height: 544px;
+  height: 450px;
   padding: 10px 10%;
 
   display: flex;
@@ -16,7 +16,7 @@ export const Conteiner = styled.main`
   background-size: cover;
 `
 export const IntoTitle = styled.div`
-padding-top: 30px;
+  padding-top: 30px;
 
   ${mixins.fonts.titleM}
 
@@ -43,10 +43,10 @@ export const IntoItens = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  div{
+  div {
     display: flex;
     flex-direction: column;
-   align-items: flex-start;
+    align-items: flex-start;
     padding: 5px;
   }
 
@@ -58,7 +58,7 @@ export const IntoItens = styled.div`
     align-items: center;
     padding: 5px;
 
-    div{
+    div {
       width: 30px;
       height: 30px;
       border-radius: 100%;
