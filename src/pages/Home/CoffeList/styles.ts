@@ -15,3 +15,11 @@ export const CoffeListTitle = styled.h2`
   color: ${({ theme }) => theme.colors['base-subtitle']};
   margin-bottom: 30px;
 `
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 1120px;
+`
