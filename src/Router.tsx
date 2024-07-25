@@ -11,6 +11,7 @@ export function Router() {
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/order/:orderId/success" element={<SucessoPage />} />
+          <Route path="/ckeckout" element={<SucessoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
