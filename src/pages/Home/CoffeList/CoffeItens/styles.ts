@@ -50,4 +50,52 @@ export const CaffeDesc = styled.p`
   ${mixins.fonts.textS}
   color: ${({ theme }) => theme.colors['base-label']};
   margin-top: 8px;
+  margin-bottom: 33px;
+`
+
+export const CaffeFooter = styled.footer`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  span {
+    flex-basis: 50%;
+    color: ${({ theme }) => theme.colors['base-text']};
+    ${mixins.fonts.textS};
+    strong {
+      ${mixins.fonts.titleM}
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+
+    ${mixins.fonts.textM}
+
+    padding: 8px;
+    border-radius: 6px;
+    background-color: ${({ theme }) => theme.colors['base-button']};
+
+    button {
+      background-color: transparent;
+      box-shadow: none;
+      cursor: pointer;
+
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  button {
+    width: 38px;
+    height: 38px;
+    border-radius: 20%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
 `

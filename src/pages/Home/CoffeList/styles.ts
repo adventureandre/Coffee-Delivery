@@ -21,5 +21,6 @@ export const Content = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  gap: 32px;
   width: 1120px;
 `

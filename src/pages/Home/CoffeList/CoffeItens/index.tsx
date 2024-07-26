@@ -1,6 +1,18 @@
-import { CaffeDesc, CaffeTag, CaffeTitle, CoffeeImg, Container } from './styles'
+import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
+import { useTheme } from 'styled-components'
+
+import {
+  CaffeDesc,
+  CaffeFooter,
+  CaffeTag,
+  CaffeTitle,
+  CoffeeImg,
+  Container,
+} from './styles'
 
 export function CoffeItens() {
+  const theme = useTheme()
+
   return (
     <Container>
       <CoffeeImg src="./images/coffees/americano.png" />
@@ -13,6 +25,25 @@ export function CoffeItens() {
       <CaffeDesc>
         Bebida feita com chocolate dissolvido no leite quente e café
       </CaffeDesc>
+      <CaffeFooter>
+        <span>
+          R$ <strong>9,90</strong>
+        </span>
+
+        <div>
+          <button>
+            <Minus weight="bold" color={theme.colors.purple} />
+          </button>
+          2
+          <button>
+            <Plus weight="bold" color={theme.colors.purple} />
+          </button>
+        </div>
+
+        <button style={{ backgroundColor: theme.colors['purple-dark'] }}>
+          <ShoppingCartSimple weight="fill" />
+        </button>
+      </CaffeFooter>
     </Container>
   )
 }
