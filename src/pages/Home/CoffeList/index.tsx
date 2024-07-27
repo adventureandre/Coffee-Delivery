@@ -6,16 +6,9 @@ export function OurCoffes() {
     <Container>
       <CoffeListTitle>Nossos cafés</CoffeListTitle>
       <Content>
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
-        <CoffeItens />
+        {Array.from({ length: 4 }).map((_, i) => (
+          <CoffeItens key={i} />
+        ))}
       </Content>
     </Container>
   )
