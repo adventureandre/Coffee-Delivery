@@ -66,36 +66,15 @@ export const CaffeFooter = styled.footer`
       ${mixins.fonts.titleM}
     }
   }
+`
 
-  div {
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-
-    ${mixins.fonts.textM}
-
-    padding: 8px;
-    border-radius: 6px;
-    background-color: ${({ theme }) => theme.colors['base-button']};
-
-    button {
-      background-color: transparent;
-      box-shadow: none;
-      cursor: pointer;
-
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  button {
-    width: 38px;
-    height: 38px;
-    border-radius: 20%;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-  }
+export const ButtonCart = styled.button`
+  width: 38px;
+  height: 38px;
+  border-radius: 20%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
 `

@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     div{
         display: flex;
         flex-direction: column;
-        align-items: center;
+
         gap: 20px;
     }
   }

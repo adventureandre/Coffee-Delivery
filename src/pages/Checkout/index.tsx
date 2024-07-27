@@ -1,14 +1,27 @@
-import { Bank, CreditCard, CurrencyDollar, MapPin, Money } from 'phosphor-react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPin,
+  Money,
+  Trash,
+} from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
+import { QuantityButton } from '../../components/Form/QuantityButton'
 import {
+  CoffeItem,
+  CoffesTotal,
   Container,
   ContainerForm,
   ContainerPayments,
+  DescCoffeItem,
   HeadingForm,
   InforContainer,
   InputForm,
   MainForm,
+  RemoveButtonCoffeItem,
+  ValorCoffeItem,
 } from './styles'
 
 export function CheckoutPage() {
@@ -101,6 +114,29 @@ export function CheckoutPage() {
 
       <InforContainer>
         <h2>Cafés selecionados</h2>
+
+        <CoffesTotal>
+          {Array.from({ length: 2 }).map((_, i) => (
+            <CoffeItem key={i}>
+              <img
+                src="/images/coffees/arabe.png"
+                alt="Coffe"
+                style={{ gridArea: 'logo' }}
+              />
+              <DescCoffeItem style={{ gridArea: 'desc' }}>
+                <h2>Expresso Tradicional</h2>
+                <QuantityButton />
+                <RemoveButtonCoffeItem>
+                  <Trash size={16} />
+                  Remover
+                </RemoveButtonCoffeItem>
+              </DescCoffeItem>
+              <ValorCoffeItem style={{ gridArea: 'valor' }}>
+                <span>R$ 9,90</span>
+              </ValorCoffeItem>
+            </CoffeItem>
+          ))}
+        </CoffesTotal>
       </InforContainer>
     </Container>
   )

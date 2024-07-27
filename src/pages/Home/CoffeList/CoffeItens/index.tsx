@@ -1,7 +1,9 @@
-import { Minus, Plus, ShoppingCartSimple } from 'phosphor-react'
+import { ShoppingCartSimple } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
+import { QuantityButton } from '../../../../components/Form/QuantityButton'
 import {
+  ButtonCart,
   CaffeDesc,
   CaffeFooter,
   CaffeTag,
@@ -30,19 +32,11 @@ export function CoffeItens() {
           R$ <strong>9,90</strong>
         </span>
 
-        <div>
-          <button>
-            <Minus weight="bold" color={theme.colors.purple} />
-          </button>
-          2
-          <button>
-            <Plus weight="bold" color={theme.colors.purple} />
-          </button>
-        </div>
+        <QuantityButton />
 
-        <button style={{ backgroundColor: theme.colors['purple-dark'] }}>
+        <ButtonCart style={{ backgroundColor: theme.colors['purple-dark'] }}>
           <ShoppingCartSimple weight="fill" />
-        </button>
+        </ButtonCart>
       </CaffeFooter>
     </Container>
   )

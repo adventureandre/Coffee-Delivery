@@ -7,6 +7,7 @@ export const Container = styled.section`
   width: 100%;
   height: 544px;
   padding: 10px 10%;
+  
 `
 
 export const CoffeListTitle = styled.h2`
