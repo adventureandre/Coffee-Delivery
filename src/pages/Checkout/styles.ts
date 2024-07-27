@@ -44,6 +44,7 @@ export const HeadingForm = styled.div`
   gap: 8px;
 
   width: 100%;
+  margin-bottom: 32px;
 
   svg {
     color: ${({ theme }) => theme.colors['yellow-dark']};
@@ -86,5 +87,34 @@ export const InputForm = styled.input`
   &::placeholder {
     ${mixins.fonts.textXS}
     color:${({ theme }) => theme.colors['base-label']};
+  }
+`
+
+export const ContainerPayments = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    ${mixins.fonts.buttonM}
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: transparent;
+    background-color: ${({ theme }) => theme.colors['base-button']};
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.purple};
+    }
+    svg {
+      color: ${({ theme }) => theme.colors.purple};
+    }
   }
 `
