@@ -1,8 +1,10 @@
-import { CurrencyDollar, MapPin } from 'phosphor-react'
+import { Bank, CreditCard, CurrencyDollar, MapPin, Money } from 'phosphor-react'
+import { useTheme } from 'styled-components'
 
 import {
   Container,
   ContainerForm,
+  ContainerPayments,
   HeadingForm,
   InforContainer,
   InputForm,
@@ -10,6 +12,8 @@ import {
 } from './styles'
 
 export function CheckoutPage() {
+  const theme = useTheme()
+
   return (
     <Container>
       <InforContainer>
@@ -65,7 +69,7 @@ export function CheckoutPage() {
 
           <ContainerForm>
             <HeadingForm>
-              <CurrencyDollar size={22} />
+              <CurrencyDollar size={22} color={theme.colors.purple} />
               <div>
                 <span>Pagamento</span>
 
@@ -75,7 +79,22 @@ export function CheckoutPage() {
                 </p>
               </div>
             </HeadingForm>
-            <MainForm></MainForm>
+            <ContainerPayments>
+              <button>
+                <CreditCard size={16} />
+                Cartão de crédito
+              </button>
+
+              <button>
+                <Bank size={16} />
+                cartão de débito
+              </button>
+
+              <button>
+                <Money size={16} />
+                Cartão de crédito
+              </button>
+            </ContainerPayments>
           </ContainerForm>
         </form>
       </InforContainer>

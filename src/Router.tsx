@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { DefaultLayout } from './layouts/DefaultLayout'
-import { CheckoutPage } from './pages/Ckeckout'
+import { CheckoutPage } from './pages/Checkout'
 import { HomePage } from './pages/Home'
 import { SucessoPage } from './pages/Success'
 
