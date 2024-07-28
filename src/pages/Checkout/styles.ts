@@ -79,18 +79,6 @@ export const MainForm = styled.div`
   grid-gap: 16px 12px;
 `
 
-export const InputForm = styled.input`
-  background-color: ${({ theme }) => theme.colors['base-button']};
-  border-radius: 4px;
-  padding: 12px;
-  border: none;
-
-  &::placeholder {
-    ${mixins.fonts.textXS}
-    color:${({ theme }) => theme.colors['base-label']};
-  }
-`
-
 export const ContainerPayments = styled.div`
   width: 100%;
   display: flex;
@@ -158,7 +146,7 @@ export const DescCoffeItem = styled.div`
   }
 `
 
-export const RemoveButtonCoffeItem = styled.div`
+export const RemoveButtonCoffeItem = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -186,4 +174,47 @@ export const ValorCoffeItem = styled.span`
   ${mixins.fonts.textM}
   font-weight: bold;
   color: ${({ theme }) => theme.colors['base-text']};
+`
+
+export const TotalInfoCoffes = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    span {
+      ${mixins.fonts.textM}
+      color: ${({ theme }) => theme.colors['base-text']};
+    }
+    .totalBold {
+      color: ${({ theme }) => theme.colors['base-subtitle']};
+      ${mixins.fonts.textL}
+    }
+  }
+`
+export const ConfirmButtonCoffeItem = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  width: 100%;
+
+  ${mixins.fonts.buttonG}
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid;
+  border-color: transparent;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  color: ${({ theme }) => theme.colors.white};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['yellow-dark']};
+  }
 `

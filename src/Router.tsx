@@ -12,7 +12,7 @@ export function Router() {
         <Route path="/" element={<DefaultLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/order/:orderId/success" element={<SucessoPage />} />
-          <Route path="/ckeckout" element={<CheckoutPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

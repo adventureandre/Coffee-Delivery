@@ -6,8 +6,7 @@ export const Container = styled.section`
   max-width: 1440px;
   width: 100%;
   height: 544px;
-  padding: 10px 10%;
-  
+  padding: 10px 40px;
 `
 
 export const CoffeListTitle = styled.h2`
@@ -20,6 +19,7 @@ export const CoffeListTitle = styled.h2`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   align-items: center;
   gap: 32px;

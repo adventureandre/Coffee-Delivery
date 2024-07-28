@@ -6,11 +6,13 @@ import { mixins } from '../../../styles/mixins'
 export const Conteiner = styled.main`
   max-width: 1440px;
   width: 100%;
-  height: 450px;
-  padding: 10px 10%;
+  min-height: 450px;
+  padding: 10px 40px;
 
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 
   background-image: url('./images/hero-bg.svg');
   background-size: cover;

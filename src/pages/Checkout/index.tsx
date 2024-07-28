@@ -8,19 +8,21 @@ import {
 } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
+import { InputForm } from '../../components/Form/InputForm'
 import { QuantityButton } from '../../components/Form/QuantityButton'
 import {
   CoffeItem,
   CoffesTotal,
+  ConfirmButtonCoffeItem,
   Container,
   ContainerForm,
   ContainerPayments,
   DescCoffeItem,
   HeadingForm,
   InforContainer,
-  InputForm,
   MainForm,
   RemoveButtonCoffeItem,
+  TotalInfoCoffes,
   ValorCoffeItem,
 } from './styles'
 
@@ -116,7 +118,7 @@ export function CheckoutPage() {
         <h2>Cafés selecionados</h2>
 
         <CoffesTotal>
-          {Array.from({ length: 2 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_, i) => (
             <CoffeItem key={i}>
               <img
                 src="/images/coffees/arabe.png"
@@ -136,6 +138,24 @@ export function CheckoutPage() {
               </ValorCoffeItem>
             </CoffeItem>
           ))}
+
+          <TotalInfoCoffes>
+            <div>
+              <span>Total de itens</span>
+              <span>R$ 29,70</span>
+            </div>
+
+            <div>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </div>
+
+            <div>
+              <span className="totalBold">Total</span>
+              <span className="totalBold">R$ 33,20</span>
+            </div>
+            <ConfirmButtonCoffeItem>confirmar pedido</ConfirmButtonCoffeItem>
+          </TotalInfoCoffes>
         </CoffesTotal>
       </InforContainer>
     </Container>

@@ -6,7 +6,7 @@ export function OurCoffes() {
     <Container>
       <CoffeListTitle>Nossos cafés</CoffeListTitle>
       <Content>
-        {Array.from({ length: 4 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_, i) => (
           <CoffeItens key={i} />
         ))}
       </Content>
