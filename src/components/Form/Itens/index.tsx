@@ -1,4 +1,4 @@
-import { Trash } from 'phosphor-react'
+import { Trash } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { QuantityButton } from '../QuantityButton'

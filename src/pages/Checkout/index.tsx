@@ -4,26 +4,21 @@ import {
   CurrencyDollar,
   MapPin,
   Money,
-  Trash,
 } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
 import { InputForm } from '../../components/Form/InputForm'
-import { QuantityButton } from '../../components/Form/QuantityButton'
+import { CardCoffeItem } from './CardCoffeItem'
 import {
-  CoffeItem,
   CoffesTotal,
   ConfirmButtonCoffeItem,
   Container,
   ContainerForm,
   ContainerPayments,
-  DescCoffeItem,
   HeadingForm,
   InforContainer,
   MainForm,
-  RemoveButtonCoffeItem,
   TotalInfoCoffes,
-  ValorCoffeItem,
 } from './styles'
 
 export function CheckoutPage() {
@@ -119,24 +114,7 @@ export function CheckoutPage() {
 
         <CoffesTotal>
           {Array.from({ length: 3 }).map((_, i) => (
-            <CoffeItem key={i}>
-              <img
-                src="/images/coffees/arabe.png"
-                alt="Coffe"
-                style={{ gridArea: 'logo' }}
-              />
-              <DescCoffeItem style={{ gridArea: 'desc' }}>
-                <h2>Expresso Tradicional</h2>
-                {/* <QuantityButton /> */}
-                <RemoveButtonCoffeItem>
-                  <Trash size={16} />
-                  Remover
-                </RemoveButtonCoffeItem>
-              </DescCoffeItem>
-              <ValorCoffeItem style={{ gridArea: 'valor' }}>
-                <span>R$ 9,90</span>
-              </ValorCoffeItem>
-            </CoffeItem>
+            <CardCoffeItem key={i} />
           ))}
 
           <TotalInfoCoffes>
