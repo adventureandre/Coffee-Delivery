@@ -1,4 +1,5 @@
-import { ShoppingCartSimple } from 'phosphor-react'
+import { CheckFat, ShoppingCartSimple } from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'styled-components'
 
 import { QuantityButton } from '../../../../components/Form/QuantityButton'
@@ -12,31 +13,74 @@ import {
   Container,
 } from './styles'
 
-export function CoffeItens() {
+interface CoffeItensProps {
+  coffee: {
+    id: string
+    title: string
+    description: string
+    tags: string[]
+    price: number
+    image: string
+  }
+}
+
+export function CoffeItens({ coffee }: CoffeItensProps) {
   const theme = useTheme()
+
+  const [quatity, setquatity] = useState<number>(1)
+  const [isaddtoCart, setIsaddtoCart] = useState<boolean>(false)
+
+  function handleIncrease() {
+    setquatity((prevQuantity) => prevQuantity + 1)
+  }
+
+  function handleDecreases() {
+    setquatity((prevQuantity) => prevQuantity - 1)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (isaddtoCart) {
+        setIsaddtoCart(false)
+      }
+    }, 2000)
+  }, [isaddtoCart])
 
   return (
     <Container>
-      <CoffeeImg src="./images/coffees/americano.png" />
+      <CoffeeImg src={coffee.image} alt={coffee.title} />
+
       <CaffeTag>
-        <span>Tradicional</span>
-        <span>com leite</span>
-        <span>gelado</span>
+        {coffee.tags.map((tag, i) => (
+          <span key={i}>{tag}</span>
+        ))}
       </CaffeTag>
-      <CaffeTitle>Chocolate Quente</CaffeTitle>
-      <CaffeDesc>
-        Bebida feita com chocolate dissolvido no leite quente e café
-      </CaffeDesc>
+
+      <CaffeTitle>{coffee.title}</CaffeTitle>
+      <CaffeDesc>{coffee.description}</CaffeDesc>
       <CaffeFooter>
         <span>
-          R$ <strong>9,90</strong>
+          R$ <strong>{coffee.price.toFixed(2)}</strong>
         </span>
 
-        <QuantityButton />
+        <QuantityButton
+          quantity={quatity}
+          onIncrease={handleIncrease}
+          onDecrease={handleDecreases}
+        />
 
-        <ButtonCart style={{ backgroundColor: theme.colors['purple-dark'] }}>
-          <ShoppingCartSimple weight="fill" />
-        </ButtonCart>
+        {isaddtoCart ? (
+          <ButtonCart style={{ backgroundColor: theme.colors['yellow-dark'] }}>
+            <CheckFat weight="fill" />
+          </ButtonCart>
+        ) : (
+          <ButtonCart
+            onClick={() => setIsaddtoCart(true)}
+            style={{ backgroundColor: theme.colors['purple-dark'] }}
+          >
+            <ShoppingCartSimple weight="fill" />
+          </ButtonCart>
+        )}
       </CaffeFooter>
     </Container>
   )

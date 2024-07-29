@@ -1,4 +1,4 @@
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 import { Aside, Container, Location } from './styles.ts'

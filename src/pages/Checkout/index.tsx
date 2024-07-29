@@ -5,7 +5,7 @@ import {
   MapPin,
   Money,
   Trash,
-} from 'phosphor-react'
+} from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
 import { InputForm } from '../../components/Form/InputForm'
@@ -127,7 +127,7 @@ export function CheckoutPage() {
               />
               <DescCoffeItem style={{ gridArea: 'desc' }}>
                 <h2>Expresso Tradicional</h2>
-                <QuantityButton />
+                {/* <QuantityButton /> */}
                 <RemoveButtonCoffeItem>
                   <Trash size={16} />
                   Remover

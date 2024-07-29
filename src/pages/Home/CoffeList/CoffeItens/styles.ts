@@ -24,6 +24,7 @@ export const CaffeTag = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   margin-top: 12px;
 

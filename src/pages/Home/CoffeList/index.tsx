@@ -1,3 +1,4 @@
+import { coffees } from '../../../../data.json'
 import { CoffeItens } from './CoffeItens'
 import { CoffeListTitle, Container, Content } from './styles'
 
@@ -6,8 +7,8 @@ export function OurCoffes() {
     <Container>
       <CoffeListTitle>Nossos cafés</CoffeListTitle>
       <Content>
-        {Array.from({ length: 8 }).map((_, i) => (
-          <CoffeItens key={i} />
+        {coffees.map((coffee) => (
+          <CoffeItens key={coffee.id} coffee={coffee} />
         ))}
       </Content>
     </Container>
