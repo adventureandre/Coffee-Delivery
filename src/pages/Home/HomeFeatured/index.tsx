@@ -1,4 +1,4 @@
-import { Coffee, Package } from 'phosphor-react'
+import { Coffee, Package } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
 import {

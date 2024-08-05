@@ -1,4 +1,4 @@
-import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
 import { useTheme } from 'styled-components'
 
 import { Container, Content, Info, SuccessTitle } from './style'

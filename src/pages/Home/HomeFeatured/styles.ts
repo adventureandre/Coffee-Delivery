@@ -1,4 +1,4 @@
-import { IconProps, ShoppingCart, Timer } from 'phosphor-react'
+import { IconProps, ShoppingCart, Timer } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
 import { mixins } from '../../../styles/mixins'

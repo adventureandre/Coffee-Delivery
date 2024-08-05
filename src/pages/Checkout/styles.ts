@@ -162,3 +162,9 @@ export const ConfirmButtonCoffeItem = styled.button`
     background-color: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `
+export const PaymentMessage = styled.p`
+  ${mixins.fonts.textXS};
+  width: 100%;
+  font-weight: 400;
+  color: red;
+`

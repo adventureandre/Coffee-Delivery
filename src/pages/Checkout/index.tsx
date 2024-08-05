@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Bank,
   CreditCard,
@@ -5,9 +6,12 @@ import {
   MapPin,
   Money,
 } from '@phosphor-icons/react'
+import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
+import z from 'zod'
 
 import { InputForm } from '../../components/Form/InputForm'
+import { Radio } from '../../components/Form/Radio'
 import { CardCoffeItem } from './CardCoffeItem'
 import {
   CoffesTotal,
@@ -18,17 +22,49 @@ import {
   HeadingForm,
   InforContainer,
   MainForm,
+  PaymentMessage,
   TotalInfoCoffes,
 } from './styles'
 
+const newOrderSchema = z.object({
+  number: z.string(),
+  address: z.string().min(1, 'Informe a rua'),
+  neighborhood: z.string().min(1, 'Informe o Bairro'),
+  city: z.string().min(1, 'Informe a Cidade'),
+  state: z.string().min(1, 'Informe o Estado'),
+  cep: z.number({ invalid_type_error: 'Informe o CEP' }),
+  complement: z.string(),
+  paymentMethod: z.enum(['cash', 'credit', 'debit'], {
+    invalid_type_error: 'Informe um método de pagamento',
+  }),
+})
+
+type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
+
 export function CheckoutPage() {
   const theme = useTheme()
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<newOrderSchemaTypes>({
+    resolver: zodResolver(newOrderSchema),
+  })
+
+  const selectedPaymentMethod = watch('paymentMethod')
+
+  function handleSendOrder(data: newOrderSchemaTypes) {
+    console.log(data)
+    //pegar o total  e juntar na order
+  }
 
   return (
     <Container>
       <InforContainer>
         <h2>Complete seu pedido</h2>
-        <form action="">
+        <form id="order" onSubmit={handleSubmit(handleSendOrder)}>
           <ContainerForm>
             <HeadingForm>
               <MapPin size={22} />
@@ -40,39 +76,52 @@ export function CheckoutPage() {
             </HeadingForm>
             <MainForm>
               <InputForm
-                type="text"
+                type="number"
                 placeholder="CEP"
                 style={{ gridArea: 'cep' }}
+                {...register('cep', { valueAsNumber: true })}
+                error={errors.cep}
               />
               <InputForm
                 type="text"
                 placeholder="Rua"
                 style={{ gridArea: 'rua' }}
+                {...register('address')}
+                error={errors.address}
               />
               <InputForm
                 type="text"
                 placeholder="Número"
                 style={{ gridArea: 'numero' }}
+                {...register('number')}
+                error={errors.number}
               />
               <InputForm
                 type="text"
                 placeholder="Complemento"
                 style={{ gridArea: 'complemento' }}
+                {...register('complement')}
               />
               <InputForm
                 type="text"
                 placeholder="Bairro"
                 style={{ gridArea: 'bairro' }}
+                {...register('neighborhood')}
+                error={errors.neighborhood}
               />
               <InputForm
                 type="text"
                 placeholder="Cidade"
                 style={{ gridArea: 'cidade' }}
+                {...register('city')}
+                error={errors.city}
               />
               <InputForm
                 type="text"
                 placeholder="UF"
                 style={{ gridArea: 'estado' }}
+                {...register('state')}
+                error={errors.state}
               />
             </MainForm>
           </ContainerForm>
@@ -90,21 +139,34 @@ export function CheckoutPage() {
               </div>
             </HeadingForm>
             <ContainerPayments>
-              <button>
+              <Radio
+                isSelected={selectedPaymentMethod === 'credit'}
+                {...register('paymentMethod')}
+                value="credit"
+              >
                 <CreditCard size={16} />
                 Cartão de crédito
-              </button>
+              </Radio>
 
-              <button>
+              <Radio
+                isSelected={selectedPaymentMethod === 'debit'}
+                {...register('paymentMethod')}
+                value="debit"
+              >
                 <Bank size={16} />
                 cartão de débito
-              </button>
+              </Radio>
 
-              <button>
+              <Radio
+                isSelected={selectedPaymentMethod === 'cash'}
+                {...register('paymentMethod')}
+                value="cash"
+              >
                 <Money size={16} />
                 Cartão de crédito
-              </button>
+              </Radio>
             </ContainerPayments>
+            <PaymentMessage>{errors.paymentMethod?.message}</PaymentMessage>
           </ContainerForm>
         </form>
       </InforContainer>
@@ -132,7 +194,9 @@ export function CheckoutPage() {
               <span className="totalBold">Total</span>
               <span className="totalBold">R$ 33,20</span>
             </div>
-            <ConfirmButtonCoffeItem>confirmar pedido</ConfirmButtonCoffeItem>
+            <ConfirmButtonCoffeItem type="submit" form="order">
+              confirmar pedido
+            </ConfirmButtonCoffeItem>
           </TotalInfoCoffes>
         </CoffesTotal>
       </InforContainer>
