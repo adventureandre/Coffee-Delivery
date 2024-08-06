@@ -1,22 +1,43 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+interface Item {
+  id: number
+  quantity: number
+}
+
+interface CardState {
+  cardState: {
+    itens: Item[] // Agora é um array de itens, que pode ser vazio
+  }
+}
+
+const initialState: CardState = {
+  cardState: {
+    itens: [],
+  },
+}
 
 export const cardSlice = createSlice({
   name: 'cardItens',
-  initialState: {
-    cardState: {
-      itens: [
-        {
-          id: 1,
-          quantity: 2,
-        },
-      ],
-    },
-  },
+  initialState,
   reducers: {
-    add: (state, action) => {
-      console.log(state, action)
+    add: (state, action: PayloadAction<[number, number]>) => {
+      const findState = state.cardState.itens.find((item) => {
+        return item.id === action.payload[0]
+      })
+
+      if (!findState) {
+        state.cardState.itens.push({
+          id: action.payload[0],
+          quantity: action.payload[1],
+        })
+      } else {
+        findState.quantity += action.payload[1]
+      }
     },
   },
 })
 
 export const card = cardSlice.reducer
+
+export const { add } = cardSlice.actions

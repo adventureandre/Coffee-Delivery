@@ -1,8 +1,10 @@
 import { CheckFat, ShoppingCartSimple } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useTheme } from 'styled-components'
 
 import { QuantityButton } from '../../../../components/Form/QuantityButton'
+import { add } from '../../../../store/slices/card'
 import {
   ButtonCart,
   CaffeDesc,
@@ -27,6 +29,8 @@ interface CoffeItensProps {
 export function CoffeItens({ coffee }: CoffeItensProps) {
   const theme = useTheme()
 
+  const dispatch = useDispatch()
+
   const [quatity, setquatity] = useState<number>(1)
   const [isaddtoCart, setIsaddtoCart] = useState<boolean>(false)
 
@@ -35,13 +39,18 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
   }
 
   function handleDecreases() {
+    if (quatity === 1) {
+      return
+    }
     setquatity((prevQuantity) => prevQuantity - 1)
   }
 
   useEffect(() => {
     setTimeout(() => {
       if (isaddtoCart) {
+        dispatch(add([parseInt(coffee.id), quatity]))
         setIsaddtoCart(false)
+        setquatity(1)
       }
     }, 2000)
   }, [isaddtoCart])
