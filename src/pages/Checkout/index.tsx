@@ -12,6 +12,7 @@ import z from 'zod'
 
 import { InputForm } from '../../components/Form/InputForm'
 import { Radio } from '../../components/Form/Radio'
+import { useAppSelector } from '../../store'
 import { CardCoffeItem } from './CardCoffeItem'
 import {
   CoffesTotal,
@@ -44,6 +45,12 @@ type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
 export function CheckoutPage() {
   const theme = useTheme()
 
+  const caffesCard = useAppSelector((state) => {
+    return state.card.cardState.itens
+  })
+
+  console.log(caffesCard)
+
   const {
     register,
     handleSubmit,
@@ -57,7 +64,6 @@ export function CheckoutPage() {
 
   function handleSendOrder(data: newOrderSchemaTypes) {
     console.log(data)
-    //pegar o total  e juntar na order
   }
 
   return (
