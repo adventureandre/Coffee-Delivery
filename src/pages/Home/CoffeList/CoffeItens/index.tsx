@@ -31,29 +31,29 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
 
   const dispatch = useDispatch()
 
-  const [quatity, setquatity] = useState<number>(1)
-  const [isaddtoCart, setIsaddtoCart] = useState<boolean>(false)
+  const [quantity, setquantity] = useState<number>(1)
+  const [isAddtoCart, setIsAddtoCart] = useState<boolean>(false)
 
   function handleIncrease() {
-    setquatity((prevQuantity) => prevQuantity + 1)
+    setquantity((prevQuantity) => prevQuantity + 1)
   }
 
   function handleDecreases() {
-    if (quatity === 1) {
+    if (quantity === 1) {
       return
     }
-    setquatity((prevQuantity) => prevQuantity - 1)
+    setquantity((prevQuantity) => prevQuantity - 1)
   }
 
   useEffect(() => {
     setTimeout(() => {
-      if (isaddtoCart) {
-        dispatch(add([parseInt(coffee.id), quatity]))
-        setIsaddtoCart(false)
-        setquatity(1)
+      if (isAddtoCart) {
+        dispatch(add([parseInt(coffee.id), quantity]))
+        setIsAddtoCart(false)
+        setquantity(1)
       }
     }, 2000)
-  }, [isaddtoCart])
+  }, [isAddtoCart])
 
   return (
     <Container>
@@ -73,18 +73,18 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
         </span>
 
         <QuantityButton
-          quantity={quatity}
+          quantity={quantity}
           onIncrease={handleIncrease}
           onDecrease={handleDecreases}
         />
 
-        {isaddtoCart ? (
+        {isAddtoCart ? (
           <ButtonCart style={{ backgroundColor: theme.colors['yellow-dark'] }}>
             <CheckFat weight="fill" />
           </ButtonCart>
         ) : (
           <ButtonCart
-            onClick={() => setIsaddtoCart(true)}
+            onClick={() => setIsAddtoCart(true)}
             style={{ backgroundColor: theme.colors['purple-dark'] }}
           >
             <ShoppingCartSimple weight="fill" />
