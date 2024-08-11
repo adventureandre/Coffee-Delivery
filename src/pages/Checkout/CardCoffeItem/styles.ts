@@ -24,6 +24,7 @@ export const DescCoffeItem = styled.div`
   gap: 8px;
 
   h2 {
+    width: 100%;
     ${mixins.fonts.textM}
     color: ${({ theme }) => theme.colors['base-subtitle']};
   }
