@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { card } from './slices/card'
+import { coffees } from './slices/coffees'
 
 export const store = configureStore({
   reducer: {
     card,
+    coffees,
   },
 })
 
