@@ -6,13 +6,16 @@ import {
   MapPin,
   Money,
 } from '@phosphor-icons/react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import z from 'zod'
 
 import { InputForm } from '../../components/Form/InputForm'
 import { Radio } from '../../components/Form/Radio'
-import { useAppSelector } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../store'
+import { loadCart } from '../../store/slices/card'
+import { loadCoffes } from '../../store/slices/coffees'
 import { CardCoffeItem } from './CardCoffeItem'
 import {
   CoffesTotal,
@@ -45,11 +48,16 @@ type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
 export function CheckoutPage() {
   const theme = useTheme()
 
-  const caffesCard = useAppSelector((state) => {
-    return state.card.cardState.itens
-  })
+  const dispatch = useAppDispatch()
 
-  console.log(caffesCard)
+  const caffesCard = useAppSelector((state) => state.card.cardState.itens)
+  const caffesItem = useAppSelector((state) => state.coffees.coffesList)
+
+  const selectedCaffes = caffesItem?.filter((coffee) =>
+    caffesCard.some((cardItem) => cardItem.id === parseInt(coffee.id)),
+  )
+
+  console.log(selectedCaffes)
 
   const {
     register,
@@ -65,6 +73,11 @@ export function CheckoutPage() {
   function handleSendOrder(data: newOrderSchemaTypes) {
     console.log(data)
   }
+
+  useEffect(() => {
+    dispatch(loadCoffes())
+    dispatch(loadCart())
+  }, [])
 
   return (
     <Container>
@@ -181,9 +194,15 @@ export function CheckoutPage() {
         <h2>Cafés selecionados</h2>
 
         <CoffesTotal>
-          {Array.from({ length: 3 }).map((_, i) => (
-            <CardCoffeItem key={i} />
-          ))}
+          {selectedCaffes &&
+            selectedCaffes.map((caffe) => (
+              <CardCoffeItem
+                key={caffe.id}
+                title={caffe.title}
+                image={caffe.image}
+                price={caffe.price}
+              />
+            ))}
 
           <TotalInfoCoffes>
             <div>

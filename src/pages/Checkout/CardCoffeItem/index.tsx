@@ -9,7 +9,13 @@ import {
   ValorCoffeItem,
 } from './styles'
 
-export function CardCoffeItem() {
+interface CardCoffeItemProps {
+  title: string
+  image: string
+  price: number
+}
+
+export function CardCoffeItem({ image, price, title }: CardCoffeItemProps) {
   const [quantity, setQuantity] = useState(1)
 
   const handleIncrease = () => {
@@ -22,13 +28,9 @@ export function CardCoffeItem() {
 
   return (
     <Container>
-      <img
-        src="/images/coffees/arabe.png"
-        alt="Coffe"
-        style={{ gridArea: 'logo' }}
-      />
+      <img src={image} alt={title} style={{ gridArea: 'logo' }} />
       <DescCoffeItem style={{ gridArea: 'desc' }}>
-        <h2>Expresso Tradicional</h2>
+        <h2>{title}</h2>
         <QuantityButton
           quantity={quantity}
           onIncrease={handleIncrease}
@@ -40,7 +42,7 @@ export function CardCoffeItem() {
         </RemoveButtonCoffeItem>
       </DescCoffeItem>
       <ValorCoffeItem style={{ gridArea: 'valor' }}>
-        <span>R$ 9,90</span>
+        <span>R$ {price.toFixed(2)}</span>
       </ValorCoffeItem>
     </Container>
   )

@@ -12,7 +12,7 @@ const initialState: InitialStateType = {
 }
 
 export const loadCoffes = createAsyncThunk('coffeItens/load', async () => {
-  return coffeesList
+  return await coffeesList
 })
 
 export const coffeSlice = createSlice({

@@ -8,7 +8,7 @@ interface Item {
 }
 
 export interface CardState {
-  itens: Item[] // Agora é um array de itens, que pode ser vazio
+  itens: Item[]
 }
 
 interface InitialStateType {
