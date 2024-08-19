@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { addCardStorege, getCardStorege } from '../storege'
 
-interface Item {
+interface ItemCard {
   id: number
   quantity: number
 }
 
 export interface CardState {
-  itens: Item[]
+  itens: ItemCard[]
 }
 
 interface InitialStateType {
@@ -34,6 +34,8 @@ export const cardSlice = createSlice({
         (item) => item.id === action.payload[0],
       )
 
+      console.log(findState)
+
       if (!findState) {
         state.cardState?.itens.push({
           id: action.payload[0],
@@ -42,6 +44,14 @@ export const cardSlice = createSlice({
       } else {
         findState.quantity += action.payload[1]
       }
+
+      addCardStorege(state.cardState)
+    },
+
+    removeAll: (state, action: PayloadAction<number>) => {
+      state.cardState.itens = state.cardState.itens.filter(
+        (coffeeOfCart) => coffeeOfCart.id !== action.payload,
+      )
 
       addCardStorege(state.cardState)
     },
@@ -54,5 +64,4 @@ export const cardSlice = createSlice({
 })
 
 export const card = cardSlice.reducer
-
-export const { add } = cardSlice.actions
+export const { add, removeAll } = cardSlice.actions

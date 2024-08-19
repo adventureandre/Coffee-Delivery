@@ -17,7 +17,7 @@ import {
 
 interface CoffeItensProps {
   coffee: {
-    id: string
+    id: number
     title: string
     description: string
     tags: string[]
@@ -38,6 +38,11 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
     setquantity((prevQuantity) => prevQuantity + 1)
   }
 
+  function handleAddToCart() {
+    dispatch(add([coffee.id, quantity]))
+    setIsAddtoCart(true)
+  }
+
   function handleDecreases() {
     if (quantity === 1) {
       return
@@ -48,7 +53,6 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
   useEffect(() => {
     setTimeout(() => {
       if (isAddtoCart) {
-        dispatch(add([parseInt(coffee.id), quantity]))
         setIsAddtoCart(false)
         setquantity(1)
       }
@@ -84,7 +88,7 @@ export function CoffeItens({ coffee }: CoffeItensProps) {
           </ButtonCart>
         ) : (
           <ButtonCart
-            onClick={() => setIsAddtoCart(true)}
+            onClick={handleAddToCart}
             style={{ backgroundColor: theme.colors['purple-dark'] }}
           >
             <ShoppingCartSimple weight="fill" />

@@ -54,10 +54,8 @@ export function CheckoutPage() {
   const caffesItem = useAppSelector((state) => state.coffees.coffesList)
 
   const selectedCaffes = caffesItem?.filter((coffee) =>
-    caffesCard.some((cardItem) => cardItem.id === parseInt(coffee.id)),
+    caffesCard.some((cardItem) => cardItem.id === coffee.id),
   )
-
-  console.log(selectedCaffes)
 
   const {
     register,
@@ -195,14 +193,10 @@ export function CheckoutPage() {
 
         <CoffesTotal>
           {selectedCaffes &&
-            selectedCaffes.map((caffe) => (
-              <CardCoffeItem
-                key={caffe.id}
-                title={caffe.title}
-                image={caffe.image}
-                price={caffe.price}
-              />
-            ))}
+            selectedCaffes.map((caffe) => {
+              const card = caffesCard.find((card) => card.id === caffe.id)
+              return <CardCoffeItem key={caffe.id} coffee={caffe} card={card} />
+            })}
 
           <TotalInfoCoffes>
             <div>

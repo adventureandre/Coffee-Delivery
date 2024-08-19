@@ -7,7 +7,7 @@ import { CoffeItens } from './CoffeItens'
 import { CoffeListTitle, Container, Content } from './styles'
 
 export interface CoffeeIten {
-  id: string
+  id: number
   title: string
   description: string
   tags: string[]

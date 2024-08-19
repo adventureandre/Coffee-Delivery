@@ -13,7 +13,7 @@ export function Header() {
         <Location>
           <MapPin size={22} weight="fill" /> <span>Goiania, GO</span>
         </Location>
-        <Link to="/cart" aria-disabled={true}>
+        <Link to="/checkout">
           <ShoppingCart size={22} weight="fill" />
           <span>3</span>
         </Link>
