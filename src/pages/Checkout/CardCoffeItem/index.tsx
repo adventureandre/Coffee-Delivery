@@ -1,8 +1,8 @@
 import { Trash } from '@phosphor-icons/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { QuantityButton } from '../../../components/Form/QuantityButton'
-import { useAppDispatch, useAppSelector } from '../../../store'
+import { useAppDispatch } from '../../../store'
 import { add, removeAll } from '../../../store/slices/card'
 import {
   Container,
@@ -31,12 +31,16 @@ export function CardCoffeItem({ coffee, card }: CardCoffeItemProps) {
   const [quantity, setQuantity] = useState<number>(card.quantity || 1)
 
   const handleIncrease = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1)
+    const newQuantity = quantity + 1
+    setQuantity(newQuantity)
+    dispatch(add([card.id, newQuantity]))
   }
 
   const handleDecrease = () => {
     if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1)
+      const newQuantity = quantity - 1
+      setQuantity(newQuantity)
+      dispatch(add([card.id, newQuantity]))
     } else {
       handleRemoveCoffe(coffee.id) // Remove o item se a quantidade for 1
     }

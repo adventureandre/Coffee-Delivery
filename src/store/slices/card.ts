@@ -30,22 +30,20 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<[number, number]>) => {
-      const findState = state.cardState?.itens.find(
-        (item) => item.id === action.payload[0],
-      )
+      const [id, quantity] = action.payload
+      const existingItem = state.cardState.itens.find((item) => item.id === id)
 
-      console.log(findState)
-
-      if (!findState) {
-        state.cardState?.itens.push({
-          id: action.payload[0],
-          quantity: action.payload[1],
+      if (!existingItem) {
+        state.cardState.itens.push({
+          id,
+          quantity,
         })
       } else {
-        findState.quantity += action.payload[1]
+        existingItem.quantity = quantity
       }
 
       addCardStorege(state.cardState)
+      console.log(state.cardState)
     },
 
     removeAll: (state, action: PayloadAction<number>) => {
@@ -58,7 +56,12 @@ export const cardSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(loadCart.fulfilled, (state, action) => {
-      state.cardState = action.payload
+      if (action.payload && action.payload.itens) {
+        state.cardState = action.payload
+      } else {
+        // Caso contrário, inicialize cardState
+        state.cardState = { itens: [] }
+      }
     })
   },
 })

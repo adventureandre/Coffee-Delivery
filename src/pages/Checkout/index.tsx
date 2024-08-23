@@ -195,7 +195,9 @@ export function CheckoutPage() {
           {selectedCaffes &&
             selectedCaffes.map((caffe) => {
               const card = caffesCard.find((card) => card.id === caffe.id)
-              return <CardCoffeItem key={caffe.id} coffee={caffe} card={card} />
+              return card ? (
+                <CardCoffeItem key={caffe.id} coffee={caffe} card={card} />
+              ) : null
             })}
 
           <TotalInfoCoffes>
