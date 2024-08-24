@@ -18,10 +18,18 @@ export function Header() {
         <Location>
           <MapPin size={22} weight="fill" /> <span>Goiania, GO</span>
         </Location>
-        <Link to="/checkout">
-          <ShoppingCart size={22} weight="fill" />
-          <span>{totalItensCard}</span>
-        </Link>
+
+        {totalItensCard >= 1 ? (
+          <Link to="/checkout">
+            <ShoppingCart size={22} weight="fill" />
+            <span>{totalItensCard}</span>
+          </Link>
+        ) : (
+          <Link to="/checkout" aria-disabled>
+            <ShoppingCart size={22} weight="fill" />
+            <span>{totalItensCard}</span>
+          </Link>
+        )}
       </Aside>
     </Container>
   )
