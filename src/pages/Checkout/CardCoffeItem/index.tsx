@@ -27,7 +27,6 @@ interface CardCoffeItemProps {
 export function CardCoffeItem({ coffee, card }: CardCoffeItemProps) {
   const dispatch = useAppDispatch()
 
-  // Estado local para a quantidade, iniciado com a quantidade do estado global
   const [quantity, setQuantity] = useState<number>(card.quantity || 1)
 
   const handleIncrease = () => {
@@ -42,7 +41,7 @@ export function CardCoffeItem({ coffee, card }: CardCoffeItemProps) {
       setQuantity(newQuantity)
       dispatch(add([card.id, newQuantity]))
     } else {
-      handleRemoveCoffe(coffee.id) // Remove o item se a quantidade for 1
+      handleRemoveCoffe(coffee.id)
     }
   }
 
@@ -56,7 +55,7 @@ export function CardCoffeItem({ coffee, card }: CardCoffeItemProps) {
       <DescCoffeItem style={{ gridArea: 'desc' }}>
         <h2>{coffee.title}</h2>
         <QuantityButton
-          quantity={quantity} // Passa a quantidade do estado local
+          quantity={quantity}
           onIncrease={handleIncrease}
           onDecrease={handleDecrease}
         />

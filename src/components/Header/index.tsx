@@ -1,9 +1,14 @@
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
+import { useAppSelector } from '../../store/index.ts'
 import { Aside, Container, Location } from './styles.ts'
 
 export function Header() {
+  const totalItensCard = useAppSelector((state) => {
+    return state.card.cardState.itens.length
+  })
+
   return (
     <Container>
       <Link to="/">
@@ -15,7 +20,7 @@ export function Header() {
         </Location>
         <Link to="/checkout">
           <ShoppingCart size={22} weight="fill" />
-          <span>3</span>
+          <span>{totalItensCard}</span>
         </Link>
       </Aside>
     </Container>

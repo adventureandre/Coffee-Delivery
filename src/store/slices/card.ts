@@ -43,7 +43,6 @@ export const cardSlice = createSlice({
       }
 
       addCardStorege(state.cardState)
-      console.log(state.cardState)
     },
 
     removeAll: (state, action: PayloadAction<number>) => {
@@ -52,6 +51,10 @@ export const cardSlice = createSlice({
       )
 
       addCardStorege(state.cardState)
+    },
+
+    getQuantityCardItens: (state) => {
+      console.log(state)
     },
   },
   extraReducers(builder) {
@@ -67,4 +70,4 @@ export const cardSlice = createSlice({
 })
 
 export const card = cardSlice.reducer
-export const { add, removeAll } = cardSlice.actions
+export const { add, removeAll, getQuantityCardItens } = cardSlice.actions
