@@ -27,7 +27,7 @@ export function Header() {
         ) : (
           <Link to="/checkout" aria-disabled>
             <ShoppingCart size={22} weight="fill" />
-            <span>{totalItensCard}</span>
+            {totalItensCard > 0 && <span>{totalItensCard}</span>}
           </Link>
         )}
       </Aside>
