@@ -8,6 +8,7 @@ import {
 } from '@phosphor-icons/react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import z from 'zod'
 
@@ -37,7 +38,7 @@ const newOrderSchema = z.object({
   city: z.string().min(1, 'Informe a Cidade'),
   state: z.string().min(1, 'Informe o Estado'),
   cep: z.number({ invalid_type_error: 'Informe o CEP' }),
-  complement: z.string(),
+  complement: z.string().optional(),
   paymentMethod: z.enum(['cash', 'credit', 'debit'], {
     invalid_type_error: 'Informe um método de pagamento',
   }),
@@ -46,8 +47,8 @@ const newOrderSchema = z.object({
 type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
 
 export function CheckoutPage() {
+  const navigate = useNavigate()
   const theme = useTheme()
-
   const dispatch = useAppDispatch()
 
   const caffesCard = useAppSelector((state) => state.card.cardState.itens)
@@ -68,6 +69,15 @@ export function CheckoutPage() {
 
   const selectedPaymentMethod = watch('paymentMethod')
 
+  const totalItemsPrice =
+    selectedCaffes?.reduce((total, caffe) => {
+      const cardItem = caffesCard.find((item) => item.id === caffe.id)
+      return cardItem ? total + caffe.price * cardItem.quantity : total
+    }, 0) || 0
+
+  const delivery = 3.5
+  const grandTotal = totalItemsPrice + delivery
+
   function handleSendOrder(data: newOrderSchemaTypes) {
     console.log(data)
   }
@@ -75,7 +85,11 @@ export function CheckoutPage() {
   useEffect(() => {
     dispatch(loadCoffes())
     dispatch(loadCart())
-  }, [])
+
+    if (totalItemsPrice <= 0) {
+      navigate('/')
+    }
+  }, [totalItemsPrice, dispatch, navigate])
 
   return (
     <Container>
@@ -87,7 +101,6 @@ export function CheckoutPage() {
               <MapPin size={22} />
               <div>
                 <span>Endereço de Entrega</span>
-
                 <p>Informe o endereço onde deseja receber o seu pedido</p>
               </div>
             </HeadingForm>
@@ -148,7 +161,6 @@ export function CheckoutPage() {
               <CurrencyDollar size={22} color={theme.colors.purple} />
               <div>
                 <span>Pagamento</span>
-
                 <p>
                   O pagamento é feito na entrega. Escolha a forma que deseja
                   pagar
@@ -171,7 +183,7 @@ export function CheckoutPage() {
                 value="debit"
               >
                 <Bank size={16} />
-                cartão de débito
+                Cartão de débito
               </Radio>
 
               <Radio
@@ -180,7 +192,7 @@ export function CheckoutPage() {
                 value="cash"
               >
                 <Money size={16} />
-                Cartão de crédito
+                Dinheiro
               </Radio>
             </ContainerPayments>
             <PaymentMessage>{errors.paymentMethod?.message}</PaymentMessage>
@@ -203,20 +215,22 @@ export function CheckoutPage() {
           <TotalInfoCoffes>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>R$ {totalItemsPrice.toFixed(2)}</span>
             </div>
 
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>R$ {delivery.toFixed(2)}</span>
             </div>
 
             <div>
               <span className="totalBold">Total</span>
-              <span className="totalBold">R$ 33,20</span>
+              <span className="totalBold">
+                R$ {totalItemsPrice > 0 ? grandTotal.toFixed(2) : '0.00'}
+              </span>
             </div>
             <ConfirmButtonCoffeItem type="submit" form="order">
-              confirmar pedido
+              Confirmar pedido
             </ConfirmButtonCoffeItem>
           </TotalInfoCoffes>
         </CoffesTotal>
