@@ -1,10 +1,27 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
+import { useParams } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 
+import { getOrderStorege } from '../../store/storege'
 import { Container, Content, Info, SuccessTitle } from './style'
 
 export function SucessoPage() {
   const theme = useTheme()
+  const { orderId } = useParams()
+
+  const orders = getOrderStorege()
+  console.log(orders)
+  const order = orders.find((order) => order.id === orderId)
+
+  const paymentMethodLabels = {
+    cash: 'Dinheiro',
+    debit: 'Débito',
+    credit: 'Crédito',
+  }
+
+  if (!order) {
+    return <h2>Pedido não encontrado</h2>
+  }
 
   return (
     <Container>
@@ -19,8 +36,11 @@ export function SucessoPage() {
               <MapPin weight="fill" />
             </div>
             <span>
-              Entrega em <strong>Rua João Daniel Martinelli, 102 </strong>
-              <br /> Farrapos - Porto Alegre, RS
+              Entrega em{' '}
+              <strong>
+                {order.address}, {order.number}
+              </strong>
+              <br /> {order.neighborhood} - {order.city}, {order.state}
             </span>
           </div>
 
@@ -40,7 +60,7 @@ export function SucessoPage() {
             </div>
             <span>
               Pagamento na entrega <br />
-              <strong>Cartão de Crédito </strong>
+              <strong>{paymentMethodLabels[order.paymentMethod]}</strong>
             </span>
           </div>
         </Info>

@@ -3,11 +3,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import { card } from './slices/card'
 import { coffees } from './slices/coffees'
+import { order } from './slices/order'
 
 export const store = configureStore({
   reducer: {
     card,
     coffees,
+    order,
   },
 })
 

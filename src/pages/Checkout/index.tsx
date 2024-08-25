@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from 'styled-components'
+import { v4 as uuidv4 } from 'uuid'
 import z from 'zod'
 
 import { InputForm } from '../../components/Form/InputForm'
@@ -17,6 +18,8 @@ import { Radio } from '../../components/Form/Radio'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { loadCart } from '../../store/slices/card'
 import { loadCoffes } from '../../store/slices/coffees'
+import { addNewOrder } from '../../store/slices/order'
+import { addCardStorage } from '../../store/storege'
 import { CardCoffeItem } from './CardCoffeItem'
 import {
   CoffesTotal,
@@ -44,7 +47,7 @@ const newOrderSchema = z.object({
   }),
 })
 
-type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
+export type newOrderSchemaTypes = z.infer<typeof newOrderSchema>
 
 export function CheckoutPage() {
   const navigate = useNavigate()
@@ -79,7 +82,16 @@ export function CheckoutPage() {
   const grandTotal = totalItemsPrice + delivery
 
   function handleSendOrder(data: newOrderSchemaTypes) {
-    console.log(data)
+    const newId = uuidv4()
+    const neworder = {
+      id: newId,
+      ...data,
+      itens: caffesCard,
+      total: grandTotal,
+    }
+    dispatch(addNewOrder(neworder))
+    addCardStorage()
+    navigate(`/order/${newId}/success`)
   }
 
   useEffect(() => {
